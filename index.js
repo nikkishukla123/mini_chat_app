@@ -3,11 +3,13 @@ const app = express();
 const mongoose = require("mongoose")
 const path = require("path");
 const Chat = require("./models/chat.js"); // . is must
+const methodOverride = require("method-override");//acessing method override
 
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","ejs")
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({ extended: true })); // Parse form data (POST request data from HTML forms)
+app.use(methodOverride("_method")); // to convert patch requests
 
 main()
    .then((res) => {
@@ -40,7 +42,7 @@ async function main() {
   //index route
   app.get("/chats",  async (req,res) =>{
        let chats =  await Chat.find();
-       console.log(chats);
+      //  console.log(chats);
        res.render("index.ejs",{chats});
   })
  
@@ -76,8 +78,25 @@ async function main() {
        let post = await Chat.findById(id);
         res.render("edit.ejs",{post})
     })
+  // updating using put request
+  app.put("/chats/:id/", async (req,res) => {
+    let{id} = req.params;
+    let {msg:newmsg} = req.body;  // message ko liya ja rah hai jiski id match hui
+    let updatedchat = await Chat.findByIdAndUpdate(id,
+      {msg:newmsg},
+       {runValidators:true,new:true}  ) // so that schema also apply on updated value and in console print update value not old thus new
 
+       console.log(updatedchat)
+       res.redirect("/chats")
+ })
 
+    //delete route
+    app.delete("/chats/:id/",async(req,res) => {
+       let{id} = req.params;
+       let deleted = await Chat.findByIdAndDelete(id);
+       console.log(" THIS IS DELETED ",deleted);
+       res.redirect("/chats");
+ })
 
 
 app.listen(8080,(req,res) => {

@@ -19,6 +19,10 @@
     
                 <p class="to">Received by: <%= chat.to %></p>
                 <a href="chats/<%= chat.id %>/edit">edit</a>
+                <br> <br>
+                <form  method="post" action="/chats/<%= chat.id %>?_method=DELETE"   >
+                    <button>delete</button>
+                </form>
                 <hr>
                 <p><%= chat.created_at.toString().split(" ")[4] %></p> <!-- first converting into string and then spliting on the basis of space and date is at 4th index-->
                 <p><%= chat.created_at.toString().split(" ").slice(0,4).join("-") %></p> <!-- slice from 0 to 4 and join by dash-->
