@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>editing the chat</title>
+</head>
+<body>
+    <h2>id: <%= post.id %></h2>
+    <p> this chat was send From: <%= post.from %> and send to <%= post.to %> </p>
+    
+    <form action="">
+        <textarea rows="5" cols="10"  name="msg" id=""><%= post.msg %></textarea>
+        <button>edit</button>
+    </form>
+</body>
+</html>

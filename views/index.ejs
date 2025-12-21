@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>whatsapp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <form action="/chats/new"><button>add new chat</button></form> <!--for adding button for adding new chat-->
+        <% for (let chat of chats) { %>
+            <div class="chat-box">
+                <p class="from">From: <%= chat.from %></p>
+    
+                <div class="msg">
+                    <p><%= chat.msg %></p>
+                </div>
+    
+                <p class="to">Received by: <%= chat.to %></p>
+                <a href="chats/<%= chat.id %>/edit">edit</a>
+                <hr>
+                <p><%= chat.created_at.toString().split(" ")[4] %></p> <!-- first converting into string and then spliting on the basis of space and date is at 4th index-->
+                <p><%= chat.created_at.toString().split(" ").slice(0,4).join("-") %></p> <!-- slice from 0 to 4 and join by dash-->
+            </div>
+        <% } %>
+    </div>
+    
+
+</body>
+</html>
