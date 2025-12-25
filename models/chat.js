@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+//here the schema is set
 const chatSchema = new mongoose.Schema ({
       from:{
         type:String,
