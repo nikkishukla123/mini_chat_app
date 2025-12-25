@@ -138,6 +138,7 @@ app.post("/chats", (req, res) => {
 });
 ```
 This takes form data, creates a new Chat document, saves it to the database, and redirects back to the chat list.
+// init.js :=> where the random is created which is stored in databse
 
 ### Common Issues and Solutions
 
